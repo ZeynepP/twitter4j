@@ -603,6 +603,10 @@ class TwitterStreamImpl extends TwitterBaseImpl implements TwitterStream {
                                 for (StreamListener statusListener : streamListeners) {
                                     statusListener.onException(te);
                                 }
+                                
+                                for (StreamListener statusListener : rawStreamListeners) {
+                                    statusListener.onException(te);
+                                }
                                 break;
                             }
                             connected = false;
@@ -632,6 +636,9 @@ class TwitterStreamImpl extends TwitterBaseImpl implements TwitterStream {
                             }
                         }
                         for (StreamListener statusListener : streamListeners) {
+                            statusListener.onException(te);
+                        }
+                        for (StreamListener statusListener : rawStreamListeners) {
                             statusListener.onException(te);
                         }
                         // there was a problem establishing the connection, or the connection closed by peer
